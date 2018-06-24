@@ -1,0 +1,18 @@
+{
+  "name": "i18n.js",
+  "version": "0.0.1",
+  "description": "i18n for javascript",
+  "repository": "https://github.com/ging0044/i18n.js.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "build": "babel src --out-dir ."
+  },
+  "author": "Patrick Gingras",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "dependencies": {}
+}
