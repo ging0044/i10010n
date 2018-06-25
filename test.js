@@ -33,11 +33,10 @@ var en = i18n("en")(_templateObject7, things3.map(function (thing, i) {
   return i18n("en")(_templateObject3, i, thing);
 }));
 
-console.assert(en === "here are 3 things:\n- at index 0 is a thing\n- at index 1 is another\n- at index 2 is one more", en);
+console.assert(en === "here are 3 things:\n- at index 0 is a thing\n- at index 1 is another\n- at index 2 is one more\n", en);
 
 var yoda = i18n("yoda")(_templateObject7, things3.map(function (thing, i) {
   return i18n("yoda")(_templateObject3, i, thing);
 }));
 
-console.log(yoda === "3 things, here are:\n- at index 0, a thing is\n- at index 1, another is\n- at index 2, one more is", yoda);
-//# sourceMappingURL=test.js.map
+console.assert(yoda === "3 things, here are:\n- at index 0, a thing is\n- at index 1, another is\n- at index 2, one more is\n", yoda);

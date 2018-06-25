@@ -30,7 +30,7 @@ ${things3.map((thing, i) => i18n("en") `- at index ${i} is ${thing}\n`)}`;
 console.assert(
   en
   ===
-  "here are 3 things:\n- at index 0 is a thing\n- at index 1 is another\n- at index 2 is one more",
+  "here are 3 things:\n- at index 0 is a thing\n- at index 1 is another\n- at index 2 is one more\n",
   en
 );
 
@@ -38,9 +38,9 @@ const yoda = i18n("yoda") `\
 here are 3 things:
 ${things3.map((thing, i) => i18n("yoda") `- at index ${i} is ${thing}\n`)}`;
 
-console.log(
+console.assert(
   yoda
   ===
-  "3 things, here are:\n- at index 0, a thing is\n- at index 1, another is\n- at index 2, one more is",
+  "3 things, here are:\n- at index 0, a thing is\n- at index 1, another is\n- at index 2, one more is\n",
   yoda
 );
