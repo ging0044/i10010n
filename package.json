@@ -2,7 +2,7 @@
   "name": "i10010n",
   "version": "0.0.1",
   "description": "simple i18n for javascript",
-  "repository": "https://github.com/ging0044/i18n.js.git",
+  "repository": "https://github.com/ging0044/i10010n.git",
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
