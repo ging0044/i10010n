@@ -56,12 +56,7 @@ export function define(template, ...args) {
  * @constructor
  */
 export function ID(template, ...args) {
-  return crypto
-    .createHash("md5")
-    .update(
-      JSON.stringify(template)
-    )
-    .digest("hex");
+  return JSON.stringify(template);
 }
 
 /**

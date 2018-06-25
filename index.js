@@ -75,7 +75,7 @@ function define(template) {
  * @constructor
  */
 function ID(template) {
-  return _crypto2.default.createHash("md5").update(JSON.stringify(template)).digest("hex");
+  return JSON.stringify(template);
 }
 
 /**
@@ -185,4 +185,3 @@ function log() {
     return (typeof x === "undefined" ? "undefined" : _typeof(x)) === "object" && JSON.stringify(x) || x;
   }).join("\n"));
 }
-//# sourceMappingURL=index.js.map
