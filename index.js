@@ -9,13 +9,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 exports.init = init;
 exports.define = define;
 exports.ID = ID;
-
-var _crypto = require("crypto");
-
-var _crypto2 = _interopRequireDefault(_crypto);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /**
  * Returns tagging function for given locale
  * 
@@ -51,9 +44,9 @@ function init(db, defaultLocale, logger) {
 /**
  * Returns config object for given template
  *
- * @param template
- * @param args
- * @returns {{t: *, v: *[]}}
+ * @param template array of strings that make up template literal
+ * @param args values to insert into template literal
+ * @returns {{t: *, v: *[]}}, object to be used in DB
  */
 function define(template) {
   for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
@@ -69,10 +62,8 @@ function define(template) {
 /**
  * Returns the i18n ID for the given template
  *
- * @param template
- * @param args
- * @returns {*}
- * @constructor
+ * @param template template array
+ * @returns string to be used as index in DB
  */
 function ID(template) {
   return JSON.stringify(template);
@@ -152,6 +143,13 @@ function getTranslation(localeData, values) {
   });
 }
 
+/**
+ * Returns changed order index if applicable, or index
+ *
+ * @param valueOrder array of numbers defining new order
+ * @param index current index
+ * @returns index number
+ */
 function getIndex(valueOrder, index) {
   return valueOrder[index] === undefined ? index : valueOrder[index];
 }
