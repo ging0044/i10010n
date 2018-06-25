@@ -1,6 +1,6 @@
-# i18n-_-js
+# `i10010n`
 ## what does it do
-i18n.js allows you to easily translate your application, and dynamically use translated text when sending strings, making strings, doing other stuff with strings...
+`i10010n` allows you to easily translate your application, and dynamically use translated text when sending strings, making strings, doing other stuff with strings...
 
 ## config
 The config file is fairly basic. It is also a javascript file, not json. Obviously.
@@ -8,13 +8,13 @@ The config file is fairly basic. It is also a javascript file, not json. Obvious
 First, you're going to want to import some functions from i18n.js:
 
 ```js
-import { define, ID } from "i18n-_-js";
+import { define, ID } from "i10010n";
 ```
 
 Then, you can configure the various template strings to support, as well as the different locales it's available in:
 
 ```js
-import { define, ID } from "i18n-_-js";
+import { define, ID } from "i10010n";
 
 export default {
     [ID `i ${0} template strings`]: {
@@ -31,7 +31,7 @@ You don't have to define the base language, since your template strings are alre
 Elsewhere, you can do this:
 
 ```js
-import { init } from "i18n-_-js";
+import { init } from "i10010n";
 import i18nConf from "./theplacewhereimadetheconf";
 
 const i18n = init(i18nConf);
