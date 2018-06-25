@@ -1,9 +1,10 @@
 # `i10010n`
-## what does it do
+## what does it do?
 `i10010n` allows you to easily translate your application, and dynamically use translated text when sending strings, making strings, doing other stuff with strings...
 
 ## config
-The config file is fairly basic. It is also a javascript file, not json. Obviously.
+The config file is fairly basic. It is also a javascript file, not JSON. Obviously.
+> Note: You can do it in JSON, but it'll take more work. See the DB used by [i18n-yummy](https://github.com/WebReflection/i18n-yummy) for more details.
 
 First, you're going to want to import some functions from i18n.js:
 
@@ -22,7 +23,7 @@ export default {
     }
 }
 ```
-> Note: you can put anything you want in the ID template string, but putting the index makes things a little clearer
+> Note: you can put anything you want in the ID template string values, but putting the indexes makes things a little clearer
 
 You don't have to define the base language, since your template strings are already in that language. Probably.
 
@@ -77,4 +78,4 @@ It's like magic! Or `Array.prototype.join`!
 ## credits
 This project is quite inspired by [i18n-yummy](https://github.com/WebReflection/i18n-yummy). I did rewrite everything from scratch (it's more than 9 lines, as you can probably tell), and changed some of the concepts, but the epiphany came from that.
 
-One difference is that there is no static locale setting. You must provide the locale with each function call. This means that you do not need to have multiple instances of i18n.
+One difference is that there is no static locale setting. You must provide the locale with each function call. This means that you do not need to have multiple instances of i18n in an application that may respond in different languages from the same instance.
