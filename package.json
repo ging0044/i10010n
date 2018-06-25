@@ -1,7 +1,7 @@
 {
-  "name": "i18n.js",
+  "name": "i18n-_-js",
   "version": "0.0.1",
-  "description": "i18n for javascript",
+  "description": "simple i18n for javascript",
   "repository": "https://github.com/ging0044/i18n.js.git",
   "main": "index.js",
   "scripts": {
