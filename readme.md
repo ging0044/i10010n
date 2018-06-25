@@ -6,7 +6,7 @@
 The config file is fairly basic. It is also a javascript file, not JSON. Obviously.
 > Note: You can do it in JSON, but it'll take more work. See the DB used by [i18n-yummy](https://github.com/WebReflection/i18n-yummy) for more details.
 
-First, you're going to want to import some functions from i18n.js:
+First, you're going to want to import some functions from i10010n:
 
 ```js
 import { define, ID } from "i10010n";
@@ -78,4 +78,4 @@ It's like magic! Or `Array.prototype.join`!
 ## credits
 This project is quite inspired by [i18n-yummy](https://github.com/WebReflection/i18n-yummy). I did rewrite everything from scratch (it's more than 9 lines, as you can probably tell), and changed some of the concepts, but the epiphany came from that.
 
-One difference is that there is no static locale setting. You must provide the locale with each function call. This means that you do not need to have multiple instances of i18n in an application that may respond in different languages from the same instance.
+One difference is that there is no static locale setting. You must provide the locale with each function call. This means that you do not need to have multiple instances of i10010n in an application that may respond in different languages from the same instance.
