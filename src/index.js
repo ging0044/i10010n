@@ -164,7 +164,7 @@ function getValue(value) {
  * @returns whatever the logging function returns. By default, undefined
  */
 function log(...stuff) {
-  log.logger(`
+  log.logger(`\
 i18n: ${
 stuff.map(x =>
   (

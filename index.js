@@ -97,6 +97,7 @@ function getTemplateData(db, template) {
   }
 
   log("No template data found for template:", template);
+
   return {};
 }
 
@@ -115,13 +116,9 @@ function getLocaleData(db, template, locale) {
     return templateData[locale];
   }
 
-  if (locale === i18n.defaultLocale) {
-    return {
-      t: template
-    };
+  if (locale !== i18n.defaultLocale) {
+    log("No locale data found in templateData:", templateData, "Falling back to base template:", template);
   }
-
-  log("No locale data found in templateData:", templateData, "Falling back to base template:", template);
 
   return { t: template };
 }
@@ -161,7 +158,6 @@ function getIndex(valueOrder, index) {
  * @returns joined array, otherwise original value
  */
 function getValue(value) {
-  // handle value vs array
   if (Array.isArray(value)) {
     return value.join('');
   }
@@ -179,7 +175,7 @@ function log() {
     stuff[_key3] = arguments[_key3];
   }
 
-  log.logger("\ni18n: " + stuff.map(function (x) {
+  log.logger("i18n: " + stuff.map(function (x) {
     return (typeof x === "undefined" ? "undefined" : _typeof(x)) === "object" && JSON.stringify(x) || x;
   }).join("\n"));
 }
