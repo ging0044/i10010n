@@ -1,4 +1,10 @@
 # `i10010n`
+
+## coming "soon"
+- Pluralization (this might take some thinking)
+  - Maybe a generic variation system to allow for more flexibility
+- Tool to generate JSON configurations
+
 ## what does it do?
 `i10010n` allows you to easily translate your application, and dynamically use translated text when sending strings, making strings, doing other stuff with strings...
 
@@ -33,12 +39,12 @@ Elsewhere, you can do this:
 
 ```js
 import { init } from "i10010n";
-import i18nConf from "./theplacewhereimadetheconf";
+import i10010nConf from "./theplacewhereimadetheconf";
 
-const i18n = init(i18nConf);
+const i10010n = init(i18nConf);
 
 console.log(
-    i18n("yoda") `i ${"love"} template strings`
+    i10010n("yoda") `i ${"love"} template strings`
 );
 // "template strings, i love"
 ```
@@ -49,7 +55,7 @@ You don't have to use English for the base language.
 To specify a different base locale than "en", you can just say so when you initialize i18n, like so:
 
 ```js
-const i18n = init(i18nConf, "yoda");
+const i10010n = init(i10010nConf, "yoda");
 ```
 
 Setting things up this way would mean that you write your base template strings in yoda, and anything else will be a translation of that.
