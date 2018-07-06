@@ -4,31 +4,31 @@
  * @param locale string for name of desired locale
  * @returns function to tag template literal
  */
-const i18n = (locale) =>
+export const i10010n = (locale) =>
   (template, ...args) =>
-    getTranslation(
-      getLocaleData(
-        getDB(),
-        template,
-        locale
-      ),
-      args
-    );
+      getTranslation(
+        getLocaleData(
+          getDB(),
+          template,
+          locale
+        ),
+        args
+      );
 
 /**
  * Initialization function
  * 
- * @param db i18n DB
+ * @param db i10010n DB
  * @param defaultLocale locale which just uses given template
- * @param logger function to log i18n errors, if not supplied, console.error
- * @return actual i18n function
+ * @param logger function to log i10010n errors, if not supplied, console.error
+ * @return actual i10010n function
  */
 export function init(db, defaultLocale, logger) {
-  i18n.db = db;
-  i18n.defaultLocale = defaultLocale || "en";
+  i10010n.db = db;
+  i10010n.defaultLocale = defaultLocale || "en";
   log.logger = logger || console.error;
 
-  return i18n;
+  return i10010n;
 }
 
 /**
@@ -46,7 +46,7 @@ export function define(template, ...args) {
 }
 
 /**
- * Returns the i18n ID for the given template
+ * Returns the i10010n ID for the given template
  *
  * @param template template array
  * @returns string to be used as index in DB
@@ -56,13 +56,13 @@ export function ID(template) {
 }
 
 /**
- * Gets i18n DB, or empty object. Logs if no DB found
+ * Gets i10010n DB, or empty object. Logs if no DB found
  * 
- * @returns i18n DB
+ * @returns i10010n DB
  */
 function getDB() {
-  if (i18n.db) {
-    return i18n.db;
+  if (i10010n.db) {
+    return i10010n.db;
   }
 
   log("No DB found!");
@@ -105,7 +105,7 @@ function getLocaleData(db, template, locale) {
     return templateData[locale];
   }
 
-  if (locale !== i18n.defaultLocale) {
+  if (locale !== i10010n.defaultLocale) {
     log(
       "No locale data found in templateData:",
       templateData,
@@ -165,7 +165,7 @@ function getValue(value) {
  */
 function log(...stuff) {
   log.logger(`\
-i18n: ${
+i10010n: ${
 stuff.map(x =>
   (
     typeof x === "object"

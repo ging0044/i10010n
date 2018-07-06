@@ -15,7 +15,7 @@ exports.ID = ID;
  * @param locale string for name of desired locale
  * @returns function to tag template literal
  */
-var i18n = function i18n(locale) {
+var i10010n = exports.i10010n = function i10010n(locale) {
   return function (template) {
     for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       args[_key - 1] = arguments[_key];
@@ -28,17 +28,17 @@ var i18n = function i18n(locale) {
 /**
  * Initialization function
  * 
- * @param db i18n DB
+ * @param db i10010n DB
  * @param defaultLocale locale which just uses given template
- * @param logger function to log i18n errors, if not supplied, console.error
- * @return actual i18n function
+ * @param logger function to log i10010n errors, if not supplied, console.error
+ * @return actual i10010n function
  */
 function init(db, defaultLocale, logger) {
-  i18n.db = db;
-  i18n.defaultLocale = defaultLocale || "en";
+  i10010n.db = db;
+  i10010n.defaultLocale = defaultLocale || "en";
   log.logger = logger || console.error;
 
-  return i18n;
+  return i10010n;
 }
 
 /**
@@ -60,7 +60,7 @@ function define(template) {
 }
 
 /**
- * Returns the i18n ID for the given template
+ * Returns the i10010n ID for the given template
  *
  * @param template template array
  * @returns string to be used as index in DB
@@ -70,13 +70,13 @@ function ID(template) {
 }
 
 /**
- * Gets i18n DB, or empty object. Logs if no DB found
+ * Gets i10010n DB, or empty object. Logs if no DB found
  * 
- * @returns i18n DB
+ * @returns i10010n DB
  */
 function getDB() {
-  if (i18n.db) {
-    return i18n.db;
+  if (i10010n.db) {
+    return i10010n.db;
   }
 
   log("No DB found!");
@@ -116,7 +116,7 @@ function getLocaleData(db, template, locale) {
     return templateData[locale];
   }
 
-  if (locale !== i18n.defaultLocale) {
+  if (locale !== i10010n.defaultLocale) {
     log("No locale data found in templateData:", templateData, "Falling back to base template:", template);
   }
 
@@ -175,7 +175,7 @@ function log() {
     stuff[_key3] = arguments[_key3];
   }
 
-  log.logger("i18n: " + stuff.map(function (x) {
+  log.logger("i10010n: " + stuff.map(function (x) {
     return (typeof x === "undefined" ? "undefined" : _typeof(x)) === "object" && JSON.stringify(x) || x;
   }).join("\n"));
 }
