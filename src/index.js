@@ -53,17 +53,21 @@ export const i10010n = (locale) =>
       );
 
 /**
- * Initialization function
+ * Initialization function. Should be run before trying to use {@link i10010n()}
  *
- * @param {DB} db i10010n {@link DB}
- * @param {Locale} defaultLocale {@link Locale} for which the original {@link Template} will be used
- * @param {Function} logger function to log i10010n errors, if not supplied, console.error
- * @return {Function} actual i10010n function
+ * @param {Object} params
+ * @param {DB} [params.db] - {@link DB} object, containing translation data
+ * @param {Locale} [params.defaultLocale] - the {@link Locale} to fall back to
+ * @param {Function} [params.logger] - function to use to log errors
+ * @param {Function} [params.getTemplateData] - function used as substitute for DB, tries to get needed data before accessing DB. Receives {@link Template} and {@link Locale} as parameters
+ * @param {Function} [params.addTemplateData] - this function is called when a template not found in the DB is encountered. Receives {@link Template} and {@link Locale} as parameters
  */
-export function init(db, defaultLocale, logger) {
-  i10010n.db = db;
-  i10010n.defaultLocale = defaultLocale || "en";
-  log.logger = logger || console.error;
+export function init(params) {
+  i10010n.db = params.db;
+  i10010n.defaultLocale = params.defaultLocale;
+  log.logger = params.logger || console.error;
+  i10010n.getTemplateData = params.getTemplateData;
+  i10010n.addTemplateData = params.addTemplateData;
 
   return i10010n;
 }
@@ -145,15 +149,30 @@ function getLocaleData(db, template, locale) {
     log("No locale specified");
   }
 
-  const templateData = getTemplateData(db, template);
+  const templateData =
+    i10010n.getTemplateData
+    ? i10010n.getTemplateData(template, locale)
+    : getTemplateData(db, template);
 
   if (templateData[locale]) {
     return templateData[locale];
   }
 
   if (locale && locale !== i10010n.defaultLocale) {
+    if (i10010n.addTemplateData) {
+      try {
+        i10010n.addTemplateData(template, locale);
+      }
+      catch (e) {
+        log(
+          "User addTemplateData function failed:",
+          e
+        );
+      }
+    }
+
     log(
-      "No locale data found in templateData:",
+      `No locale data for "${locale}" found in templateData:`,
       templateData,
       "Falling back to base template:",
       template
