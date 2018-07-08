@@ -6,13 +6,14 @@
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
-    "build": "babel src --out-dir ."
+    "build": "babel src --out-dir . && ./node_modules/.bin/jsdoc ./index.js -d docs"
   },
   "author": "Patrick Gingras",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "jsdoc": "^3.5.5"
   },
   "dependencies": {},
   "keywords": [
