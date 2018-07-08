@@ -1,3 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" &amp;&amp; typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj &amp;&amp; typeof Symbol === "function" &amp;&amp; obj.constructor === Symbol &amp;&amp; obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.init = init;
+exports.define = define;
+exports.ID = ID;
 /**
  * String representing a locale
  * @typedef {string} Locale
@@ -27,12 +66,12 @@
 
 /**
  * The LocaleData values of a string, by locale
- * @typedef {Object.<Locale, LocaleData>} TemplateData
+ * @typedef {Object.&lt;Locale, LocaleData>} TemplateData
  */
 
 /**
  * Database of string translations to different locales
- * @typedef {Object.<TemplateID, TemplateData>} DB
+ * @typedef {Object.&lt;TemplateID, TemplateData>} DB
  */
 
 /**
@@ -41,16 +80,15 @@
  * @param {Locale} locale string for name of desired {@link Locale}
  * @returns {Function} function to tag template literal
  */
-export const i10010n = (locale) =>
-  (template, ...args) =>
-      getTranslation(
-        getLocaleData(
-          getDB(),
-          template,
-          locale
-        ),
-        args
-      );
+var i10010n = exports.i10010n = function i10010n(locale) {
+  return function (template) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key &lt; _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return getTranslation(getLocaleData(getDB(), template, locale), args);
+  };
+};
 
 /**
  * Initialization function
@@ -60,7 +98,7 @@ export const i10010n = (locale) =>
  * @param {Function} logger function to log i10010n errors, if not supplied, console.error
  * @return {Function} actual i10010n function
  */
-export function init(db, defaultLocale, logger) {
+function init(db, defaultLocale, logger) {
   i10010n.db = db;
   i10010n.defaultLocale = defaultLocale || "en";
   log.logger = logger || console.error;
@@ -72,15 +110,19 @@ export function init(db, defaultLocale, logger) {
  * Returns config object for given template
  *
  * This function should be used as a tagging function for a template string:
- * <pre><code>
+ * &lt;pre>&lt;code>
  * define `this is the ${"template"} I would like to define`
- * </code></pre>
+ * &lt;/code>&lt;/pre>
  *
  * @param {Template} template array of strings that make up {@link Template} literal
  * @param {*} ...args values to insert into template literal
  * @returns {LocaleData} {@link LocaleData} object to be used in DB
  */
-export function define(template, ...args) {
+function define(template) {
+  for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 &lt; _len2; _key2++) {
+    args[_key2 - 1] = arguments[_key2];
+  }
+
   return {
     t: template,
     v: args
@@ -93,7 +135,7 @@ export function define(template, ...args) {
  * @param {Template} template {@link Template} array
  * @returns {TemplateID} to be used as {@link TemplateID} in DB
  */
-export function ID(template) {
+function ID(template) {
   return JSON.stringify(template);
 }
 
@@ -119,15 +161,12 @@ function getDB() {
  * @return {TemplateData} DB entry with key of {@link TemplateID} of {@link Template}
  */
 function getTemplateData(db, template) {
-  const templateData = db[ID(template)];
+  var templateData = db[ID(template)];
   if (templateData) {
     return templateData;
   }
 
-  log(
-    "No template data found for template:",
-    template
-  );
+  log("No template data found for template:", template);
 
   return {};
 }
@@ -145,34 +184,32 @@ function getLocaleData(db, template, locale) {
     log("No locale specified");
   }
 
-  const templateData = getTemplateData(db, template);
+  var templateData = getTemplateData(db, template);
 
   if (templateData[locale]) {
     return templateData[locale];
   }
 
-  if (locale && locale !== i10010n.defaultLocale) {
-    log(
-      "No locale data found in templateData:",
-      templateData,
-      "Falling back to base template:",
-      template
-    );
+  if (locale &amp;&amp; locale !== i10010n.defaultLocale) {
+    log("No locale data found in templateData:", templateData, "Falling back to base template:", template);
   }
 
-  return { t: template }
+  return { t: template };
 }
 
 /**
  * Puts together string for locale based on localeData and values
  *
  * @param {LocaleData} localeData {@link LocaleData} object
- * @param {Array<*>} values array of values to be inserted into template string
+ * @param {Array&lt;*>} values array of values to be inserted into template string
  * @returns {string} generated string in given locale
  */
 function getTranslation(localeData, values) {
-  const { t, v = [] } = localeData;
-  return t.reduce((acc, str, i) => {
+  var t = localeData.t,
+      _localeData$v = localeData.v,
+      v = _localeData$v === undefined ? [] : _localeData$v;
+
+  return t.reduce(function (acc, str, i) {
     return acc + getValue(values[getIndex(v, i - 1)]) + str;
   });
 }
@@ -185,9 +222,7 @@ function getTranslation(localeData, values) {
  * @returns {number} index number
  */
 function getIndex(valueOrder, index) {
-  return valueOrder[index] === undefined
-    ? index
-    : valueOrder[index];
+  return valueOrder[index] === undefined ? index : valueOrder[index];
 }
 
 /**
@@ -209,15 +244,34 @@ function getValue(value) {
  * @param {string} stuff the stuff to log, which will be joined with \n
  * @returns {*} whatever the logging function returns. By default, undefined
  */
-function log(...stuff) {
-  log.logger(`\
-i10010n: ${
-stuff.map(x =>
-  (
-    typeof x === "object"
-    &&
-    JSON.stringify(x)
-  ) || x)
-  .join("\n")
-}`);
-}
+function log() {
+  for (var _len3 = arguments.length, stuff = Array(_len3), _key3 = 0; _key3 &lt; _len3; _key3++) {
+    stuff[_key3] = arguments[_key3];
+  }
+
+  log.logger("i10010n: " + stuff.map(function (x) {
+    return (typeof x === "undefined" ? "undefined" : _typeof(x)) === "object" &amp;&amp; JSON.stringify(x) || x;
+  }).join("\n"));
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#define">define</a></li><li><a href="global.html#getDB">getDB</a></li><li><a href="global.html#getIndex">getIndex</a></li><li><a href="global.html#getLocaleData">getLocaleData</a></li><li><a href="global.html#getTemplateData">getTemplateData</a></li><li><a href="global.html#getTranslation">getTranslation</a></li><li><a href="global.html#getValue">getValue</a></li><li><a href="global.html#i10010n">i10010n</a></li><li><a href="global.html#ID">ID</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#log">log</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jul 07 2018 22:04:30 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
