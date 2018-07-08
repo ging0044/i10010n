@@ -5,6 +5,10 @@
   - Maybe a generic variation system to allow for more flexibility
 - Tool to generate JSON configurations
 
+## changelog
+- 0.3
+  - broke the init function; now it takes an object with various configuration parameters. See the [documentation](https://ging0044.github.io/i10010n/global.html#init) for more details
+
 ## what does it do?
 `i10010n` allows you to easily translate your application, and dynamically use translated text when sending strings, making strings, doing other stuff with strings...
 
@@ -41,7 +45,7 @@ Elsewhere, you can do this:
 import { init } from "i10010n";
 import i10010nConf from "./theplacewhereimadetheconf";
 
-const i10010n = init(i18nConf);
+const i10010n = init({DB: i18nConf});
 
 console.log(
     i10010n("yoda") `i ${"love"} template strings`
@@ -55,7 +59,10 @@ You don't have to use English for the base language.
 To specify a different base locale than "en", you can just say so when you initialize i18n, like so:
 
 ```js
-const i10010n = init(i10010nConf, "yoda");
+const i10010n = init({
+  DB: i18nConf,
+  defaultLocale: "yoda"
+});
 ```
 
 Setting things up this way would mean that you write your base template strings in yoda, and anything else will be a translation of that.
