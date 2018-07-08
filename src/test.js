@@ -1,7 +1,7 @@
 import { init, ID, define, plural, amount } from "./";
 
-const i10010n = init(
-  {
+const i10010n = init({
+  db: {
     [ID `this ${0} a ${1}`]: {
       "yoda": define `a ${1}, this ${0}`
     },
@@ -11,8 +11,9 @@ const i10010n = init(
     [ID `here are 3 things:\n${0}`]: {
       "yoda": define `3 things, here are:\n${0}`
     }
-  }
-);
+  },
+  defaultLocale: "en"
+});
 
 console.assert(i10010n("en") `this ${"is"} a ${"test"}` === "this is a test");
 console.assert(i10010n("yoda") `this ${"is"} a ${"test"}` === "a test, this is");

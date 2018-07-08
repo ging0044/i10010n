@@ -1,6 +1,6 @@
 "use strict";
 
-var _init;
+var _db;
 
 var _templateObject = _taggedTemplateLiteral(["this ", " a ", ""], ["this ", " a ", ""]),
     _templateObject2 = _taggedTemplateLiteral(["a ", ", this ", ""], ["a ", ", this ", ""]),
@@ -16,13 +16,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var i10010n = (0, _.init)((_init = {}, _defineProperty(_init, (0, _.ID)(_templateObject, 0, 1), {
-  "yoda": (0, _.define)(_templateObject2, 1, 0)
-}), _defineProperty(_init, (0, _.ID)(_templateObject3, 0, 1), {
-  "yoda": (0, _.define)(_templateObject4, 0, 1)
-}), _defineProperty(_init, (0, _.ID)(_templateObject5, 0), {
-  "yoda": (0, _.define)(_templateObject6, 0)
-}), _init));
+var i10010n = (0, _.init)({
+  db: (_db = {}, _defineProperty(_db, (0, _.ID)(_templateObject, 0, 1), {
+    "yoda": (0, _.define)(_templateObject2, 1, 0)
+  }), _defineProperty(_db, (0, _.ID)(_templateObject3, 0, 1), {
+    "yoda": (0, _.define)(_templateObject4, 0, 1)
+  }), _defineProperty(_db, (0, _.ID)(_templateObject5, 0), {
+    "yoda": (0, _.define)(_templateObject6, 0)
+  }), _db),
+  defaultLocale: "en"
+});
 
 console.assert(i10010n("en")(_templateObject, "is", "test") === "this is a test");
 console.assert(i10010n("yoda")(_templateObject, "is", "test") === "a test, this is");
