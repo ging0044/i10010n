@@ -6,7 +6,9 @@
 - Tool to generate JSON configurations
 
 ## changelog
-- 0.3
+- 0.3.1
+  - changed default logging function from `console.error` to `() => {}`
+- 0.3.0
   - broke the init function; now it takes an object with various configuration parameters. See the [documentation](https://ging0044.github.io/i10010n/global.html#init) for more details
 
 ## what does it do?
