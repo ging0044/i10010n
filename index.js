@@ -75,7 +75,7 @@ var i10010n = exports.i10010n = function i10010n(locale) {
 function init(params) {
   i10010n.db = params.db;
   i10010n.defaultLocale = params.defaultLocale;
-  log.logger = params.logger || console.error;
+  log.logger = params.logger || function () {};
   i10010n.getTemplateData = params.getTemplateData;
   i10010n.addTemplateData = params.addTemplateData;
 
