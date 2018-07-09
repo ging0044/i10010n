@@ -1,6 +1,6 @@
 {
   "name": "i10010n",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "simple i18n for javascript",
   "repository": "https://github.com/ging0044/i10010n.git",
   "main": "index.js",
