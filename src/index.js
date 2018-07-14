@@ -1,3 +1,4 @@
+import E from "./Error";
 /**
  * String representing a locale
  * @typedef {string} Locale
@@ -43,14 +44,14 @@
  */
 export const i10010n = (locale) =>
   (template, ...args) =>
-      getTranslation(
-        getLocaleData(
-          getDB(),
-          template,
-          locale
-        ),
-        args
-      );
+    getTranslation(
+      getLocaleData(
+        getDB(),
+        template,
+        locale
+      ),
+      args
+    );
 
 /**
  * Initialization function. Should be run before trying to use {@link i10010n()}
@@ -111,7 +112,12 @@ function getDB() {
     return i10010n.db;
   }
 
-  log("No DB found!");
+  log(
+    E.MISSING_DB,
+    {},
+    formatLog("No DB found!")
+  );
+
   return {};
 }
 
@@ -129,8 +135,14 @@ function getTemplateData(db, template) {
   }
 
   log(
-    "No template data found for template:",
-    template
+    E.MISSING_TEMPLATE_DATA,
+    {
+      template
+    },
+    formatLog(
+      "No template data found for template:",
+      template
+    )
   );
 
   return {};
@@ -146,15 +158,42 @@ function getTemplateData(db, template) {
  */
 function getLocaleData(db, template, locale) {
   if (!locale) {
-    log("No locale specified");
+    log(
+      E.MISSING_LOCALE,
+      {
+        template
+      },
+      formatLog(
+        "No locale specified for template:",
+        template
+      )
+    );
   }
 
-  const templateData =
-    i10010n.getTemplateData
-    ? i10010n.getTemplateData(template, locale)
-    : getTemplateData(db, template);
+  let templateData;
 
-  if (templateData[locale]) {
+  try {
+    templateData =
+      i10010n.getTemplateData
+      ? i10010n.getTemplateData(template, locale)
+      : getTemplateData(db, template);
+  }
+  catch (e) {
+    log(
+      E.USER_FUNCTION_FAILED,
+      {
+        template,
+        locale,
+        user_function: "getTemplateData"
+      },
+      formatLog(
+        "User getTemplateData function failed:",
+        e
+      )
+    );
+  }
+
+  if (templateData && templateData[locale]) {
     return templateData[locale];
   }
 
@@ -165,17 +204,32 @@ function getLocaleData(db, template, locale) {
       }
       catch (e) {
         log(
-          "User addTemplateData function failed:",
-          e
+          E.USER_FUNCTION_FAILED,
+          {
+            template,
+            locale,
+            user_function: "addTemplateData"
+          },
+          formatLog(
+            "User addTemplateData function failed:",
+            e
+          )
         );
       }
     }
 
     log(
-      `No locale data for "${locale}" found in templateData:`,
-      templateData,
-      "Falling back to base template:",
-      template
+      E.MISSING_LOCALE_DATA,
+      {
+        template,
+        locale
+      },
+      formatLog(
+        `No locale data for "${locale}" found in templateData:`,
+        templateData,
+        "Falling back to base template:",
+        template
+      )
     );
   }
 
@@ -228,8 +282,8 @@ function getValue(value) {
  * @param {string} stuff the stuff to log, which will be joined with \n
  * @returns {*} whatever the logging function returns. By default, undefined
  */
-function log(...stuff) {
-  log.logger(`\
+function formatLog(...stuff) {
+  return `\
 i10010n: ${
 stuff.map(x =>
   (
@@ -238,5 +292,10 @@ stuff.map(x =>
     JSON.stringify(x)
   ) || x)
   .join("\n")
-}`);
+}`;
 }
+
+function log(error, data, message) {
+  log.logger(error, data, message);
+}
+
