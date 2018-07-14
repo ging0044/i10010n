@@ -6,6 +6,8 @@
 - Tool to generate JSON configurations
 
 ## changelog
+- 0.3.2
+  - improved logging function; user logging function is now passed an error type, as seen in Error.js, as well as an object of relevant data and a message. JSDoc updates are not in yet, I didn't feel like it
 - 0.3.1
   - changed default logging function from `console.error` to `() => {}`
 - 0.3.0
