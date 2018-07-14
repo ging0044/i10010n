@@ -27,6 +27,8 @@ var i10010n = (0, _.init)({
   defaultLocale: "en"
 });
 
+console.assert(_.ErrorTypes.MISSING_TEMPLATE_DATA === "Missing template data");
+
 console.assert(i10010n("en")(_templateObject, "is", "test") === "this is a test");
 console.assert(i10010n("yoda")(_templateObject, "is", "test") === "a test, this is");
 

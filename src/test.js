@@ -1,4 +1,4 @@
-import { init, ID, define, plural, amount } from "./";
+import { init, ID, define, plural, amount, ErrorTypes } from "./";
 
 const i10010n = init({
   db: {
@@ -14,6 +14,8 @@ const i10010n = init({
   },
   defaultLocale: "en"
 });
+
+console.assert(ErrorTypes.MISSING_TEMPLATE_DATA === "Missing template data");
 
 console.assert(i10010n("en") `this ${"is"} a ${"test"}` === "this is a test");
 console.assert(i10010n("yoda") `this ${"is"} a ${"test"}` === "a test, this is");

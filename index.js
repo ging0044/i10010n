@@ -3,21 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.i10010n = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _Error = require("./Error");
+
+Object.defineProperty(exports, "ErrorTypes", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Error).default;
+  }
+});
 exports.init = init;
 exports.define = define;
 exports.ID = ID;
 
-var _Error = require("./Error");
-
-var _Error2 = _interopRequireDefault(_Error);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
+/*
  * String representing a locale
  * @typedef {string} Locale
  */
@@ -133,7 +136,7 @@ function getDB() {
     return i10010n.db;
   }
 
-  log(_Error2.default.MISSING_DB, {}, formatLog("No DB found!"));
+  log(ErrorTypes.MISSING_DB, {}, formatLog("No DB found!"));
 
   return {};
 }
@@ -151,7 +154,7 @@ function getTemplateData(db, template) {
     return templateData;
   }
 
-  log(_Error2.default.MISSING_TEMPLATE_DATA, {
+  log(ErrorTypes.MISSING_TEMPLATE_DATA, {
     template: template
   }, formatLog("No template data found for template:", template));
 
@@ -168,7 +171,7 @@ function getTemplateData(db, template) {
  */
 function getLocaleData(db, template, locale) {
   if (!locale) {
-    log(_Error2.default.MISSING_LOCALE, {
+    log(ErrorTypes.MISSING_LOCALE, {
       template: template
     }, formatLog("No locale specified for template:", template));
   }
@@ -178,7 +181,7 @@ function getLocaleData(db, template, locale) {
   try {
     templateData = i10010n.getTemplateData ? i10010n.getTemplateData(template, locale) : getTemplateData(db, template);
   } catch (e) {
-    log(_Error2.default.USER_FUNCTION_FAILED, {
+    log(ErrorTypes.USER_FUNCTION_FAILED, {
       template: template,
       locale: locale,
       user_function: "getTemplateData"
@@ -194,7 +197,7 @@ function getLocaleData(db, template, locale) {
       try {
         i10010n.addTemplateData(template, locale);
       } catch (e) {
-        log(_Error2.default.USER_FUNCTION_FAILED, {
+        log(ErrorTypes.USER_FUNCTION_FAILED, {
           template: template,
           locale: locale,
           user_function: "addTemplateData"
@@ -202,7 +205,7 @@ function getLocaleData(db, template, locale) {
       }
     }
 
-    log(_Error2.default.MISSING_LOCALE_DATA, {
+    log(ErrorTypes.MISSING_LOCALE_DATA, {
       template: template,
       locale: locale
     }, formatLog("No locale data for \"" + locale + "\" found in templateData:", templateData, "Falling back to base template:", template));

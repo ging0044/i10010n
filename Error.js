@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {
-  MISSING_TEMPLATE_DATA: 1,
-  MISSING_LOCALE_DATA: 2,
-  MISSING_DB: 4,
-  MISSING_LOCALE: 8,
-  USER_FUNCTION_FAILED: 16
+  MISSING_TEMPLATE_DATA: "Missing template data",
+  MISSING_LOCALE_DATA: "Missing locale data",
+  MISSING_DB: "Missing DB",
+  MISSING_LOCALE: "Missing Locale",
+  USER_FUNCTION_FAILED: "User function failed"
 };

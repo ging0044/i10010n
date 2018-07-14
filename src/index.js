@@ -1,5 +1,6 @@
-import E from "./Error";
-/**
+export { default as ErrorTypes } from "./Error";
+
+/*
  * String representing a locale
  * @typedef {string} Locale
  */
@@ -113,7 +114,7 @@ function getDB() {
   }
 
   log(
-    E.MISSING_DB,
+    ErrorTypes.MISSING_DB,
     {},
     formatLog("No DB found!")
   );
@@ -135,7 +136,7 @@ function getTemplateData(db, template) {
   }
 
   log(
-    E.MISSING_TEMPLATE_DATA,
+    ErrorTypes.MISSING_TEMPLATE_DATA,
     {
       template
     },
@@ -159,7 +160,7 @@ function getTemplateData(db, template) {
 function getLocaleData(db, template, locale) {
   if (!locale) {
     log(
-      E.MISSING_LOCALE,
+      ErrorTypes.MISSING_LOCALE,
       {
         template
       },
@@ -180,7 +181,7 @@ function getLocaleData(db, template, locale) {
   }
   catch (e) {
     log(
-      E.USER_FUNCTION_FAILED,
+      ErrorTypes.USER_FUNCTION_FAILED,
       {
         template,
         locale,
@@ -204,7 +205,7 @@ function getLocaleData(db, template, locale) {
       }
       catch (e) {
         log(
-          E.USER_FUNCTION_FAILED,
+          ErrorTypes.USER_FUNCTION_FAILED,
           {
             template,
             locale,
@@ -219,7 +220,7 @@ function getLocaleData(db, template, locale) {
     }
 
     log(
-      E.MISSING_LOCALE_DATA,
+      ErrorTypes.MISSING_LOCALE_DATA,
       {
         template,
         locale
