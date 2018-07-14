@@ -1,4 +1,4 @@
-import { init, ID, define, plural, amount, ErrorTypes } from "./";
+import { init, ID, define, plural, amount, ErrorTypes } from "./index";
 
 const i10010n = init({
   db: {
@@ -15,10 +15,10 @@ const i10010n = init({
   defaultLocale: "en"
 });
 
-console.assert(ErrorTypes.MISSING_TEMPLATE_DATA === "Missing template data");
+console.assert(ErrorTypes.MISSING_TEMPLATE_DATA === "Missing template data", "errortypes" + JSON.stringify(ErrorTypes, 2));
 
-console.assert(i10010n("en") `this ${"is"} a ${"test"}` === "this is a test");
-console.assert(i10010n("yoda") `this ${"is"} a ${"test"}` === "a test, this is");
+console.assert(i10010n("en") `this ${"is"} a ${"test"}` === "this is a test", "en");
+console.assert(i10010n("yoda") `this ${"is"} a ${"test"}` === "a test, this is", "yoda");
 
 const things3 = [
   "a thing",
@@ -34,7 +34,8 @@ console.assert(
   en
   ===
   "here are 3 things:\n- at index 0 is a thing\n- at index 1 is another\n- at index 2 is one more\n",
-  en
+  en,
+  "en2"
 );
 
 const yoda = i10010n("yoda") `\
@@ -45,5 +46,6 @@ console.assert(
   yoda
   ===
   "3 things, here are:\n- at index 0, a thing is\n- at index 1, another is\n- at index 2, one more is\n",
-  yoda
+  yoda,
+  "yoda2"
 );

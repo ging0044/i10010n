@@ -1,4 +1,4 @@
-export default {
+export const ErrorTypes = {
   MISSING_TEMPLATE_DATA: "Missing template data",
   MISSING_LOCALE_DATA: "Missing locale data",
   MISSING_DB: "Missing DB",

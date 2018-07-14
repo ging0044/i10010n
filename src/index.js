@@ -1,4 +1,5 @@
-export { default as ErrorTypes } from "./Error";
+import { ErrorTypes } from "./ErrorTypes";
+export { ErrorTypes };
 
 /*
  * String representing a locale

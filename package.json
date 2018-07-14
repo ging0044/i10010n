@@ -5,15 +5,17 @@
   "repository": "https://github.com/ging0044/i10010n.git",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js",
-    "build": "babel src --out-dir . && ./node_modules/.bin/jsdoc ./index.js -d docs"
+    "test": "rollup -c rollup.config.js -i src/test.js --file test.js --format cjs && node test.js",
+    "build": "rollup -c rollup.config.js && jsdoc ./index.js -d docs"
   },
   "author": "Patrick Gingras",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "jsdoc": "^3.5.5"
+    "jsdoc": "^3.5.5",
+    "rollup": "^0.62.0",
+    "rollup-plugin-babel": "^3.0.7"
   },
   "dependencies": {},
   "keywords": [
